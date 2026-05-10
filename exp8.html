@@ -1,0 +1,117 @@
+Code:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Simple Calculator</title>
+<style>
+    .calc{
+        border: 2px solid black;
+        width: 200px;
+    }
+    body {
+        font-family: Arial, sans-serif;
+        margin: 40px;
+        text-align: center;
+    }
+    input {
+        padding: 8px;
+        margin: 5px;
+        width: 150px;
+        font-size: 16px;
+    }
+    button {
+        padding: 10px 15px;
+        margin: 5px;
+        font-size: 18px;
+        cursor: pointer;
+    }
+    .operations {
+        display: flex;
+        justify-content: center;
+        gap:10px;
+        margin-top: 10px;
+    }
+</style>
+</head>
+<body>
+<h2>Simple Calculator</h2>
+<center>
+<div class="calc">
+
+<!-- Input fields -->
+<input type="number" id="num1" placeholder="First number">
+<br>
+<input type="number" id="num2" placeholder="Second number">
+
+<!-- Operation buttons in a single row -->
+<div class="operations">
+    <button onclick="calculate('+')">+</button>
+    <button onclick="calculate('-')">-</button>
+    <button onclick="calculate('*')">×</button>
+</div> 
+    <div class="operations">   
+    <button onclick="calculate('/')">÷</button>
+    <button onclick="calculate('%')">%</button>
+    <button onclick="calculate('^')">^</button>
+</div>
+
+<!-- Result display -->
+<h3 id="result">Result: </h3>
+</div>
+</center>
+<script>
+// Function to perform calculation
+function calculate(operator) {
+    // Get input values
+    let n1 = document.getElementById("num1").value;
+    let n2 = document.getElementById("num2").value;
+
+    // Input validation
+    if (n1 === "" || n2 === "") {
+        document.getElementById("result").innerText = "Result: Please enter both numbers.";
+        return;
+    }
+
+    let num1 = parseFloat(n1);
+    let num2 = parseFloat(n2);
+    let res;
+     // Perform operation using switch-case
+    switch (operator) {
+        case '+':
+            res = num1 + num2;
+            break;
+        case '-':
+            res = num1 - num2;
+            break;
+        case '*':
+            res = num1 * num2;
+            break;
+        case '/':
+            if (num2 === 0) {
+                document.getElementById("result").innerText = "Result: Cannot divide by zero.";
+                return;
+            }
+            res = num1 / num2;
+            break;
+        case '%':
+            if (num2 === 0) {
+                document.getElementById("result").innerText = "Result: Cannot modulo by zero.";
+                return;
+            }
+            res = num1 % num2;
+            break;
+        case '^':
+            res = Math.pow(num1, num2);
+            break;
+        default:
+            document.getElementById("result").innerText = "Result: Invalid operation.";
+            return;
+    }
+  // Display result
+    document.getElementById("result").innerText = "Result: " + res;
+}
+</script>
+</body>
+</html>
+
