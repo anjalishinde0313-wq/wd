@@ -1,0 +1,90 @@
+Code:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic DOM Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #itemList {
+            margin-top: 10px;
+            padding: 0;
+            list-style-type: none;
+        }
+        #itemList li {
+            background: #f0f0f0;
+            margin: 5px 0;
+            padding: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        button {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Dynamic Content with JavaScript DOM</h1>
+
+    <input type="text" id="itemInput" placeholder="Enter item" />
+    <button id="addBtn">Add Item</button>
+
+    <ul id="itemList"></ul>
+
+    <script>
+        // Get references to DOM elements
+        const addBtn = document.getElementById('addBtn');
+        const itemInput = document.getElementById('itemInput');
+        const itemList = document.getElementById('itemList');
+
+        // Function to add a new item
+        function addItem() {
+            const value = itemInput.value.trim();
+
+            if (value === "") {
+                alert("Please enter an item.");
+                return;
+            }
+
+            // Create new list item
+            const li = document.createElement('li');
+            li.textContent = value;
+
+            // Create remove button
+            const removeBtn = document.createElement('button');
+            removeBtn.textContent = "Remove";
+            removeBtn.onclick = function () {
+                itemList.removeChild(li);
+            };
+
+            // Append button to list item
+            li.appendChild(removeBtn);
+
+            // Add list item to the list
+            itemList.appendChild(li);
+
+            // Clear input
+            itemInput.value = "";
+        }
+
+        // Event listener for Add button
+        addBtn.addEventListener('click', addItem);
+
+        // Allow pressing Enter to add item
+        itemInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                addItem();
+            }
+        });
+    </script>
+</body>
+</html>
+
+ 
+
